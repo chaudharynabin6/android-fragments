@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.chaudharynabin6.fragments.R
+import com.chaudharynabin6.fragments.databinding.FragmentBasicsBinding
 
 
 class FragmentBasics : Fragment() {
 
-
+    private lateinit var binding: FragmentBasicsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -19,10 +20,14 @@ class FragmentBasics : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_basics, container, false)
+        binding = FragmentBasicsBinding.inflate(inflater,container,false)
+        binding.text.text = "hello"
+        return binding.root
+
     }
+
 
 
 }

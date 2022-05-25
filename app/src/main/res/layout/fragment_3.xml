@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment_manager.Fragment3">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_3_fragment_container_1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/fragment_3_fragment_container_2"
+        android:name="com.chaudharynabin6.fragments.fragment_manager.Fragment1"
+        />
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_3_fragment_container_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fragment_3_fragment_container_1"
+        android:name="com.chaudharynabin6.fragments.fragment_manager.Fragment2"
+        />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

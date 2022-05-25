@@ -1,6 +1,7 @@
 package com.chaudharynabin6.fragments.fragment_manager
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,8 @@ class Fragment3 : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
 
     override fun onCreateView(
@@ -35,6 +38,8 @@ class Fragment3 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        Log.e("Fragment 3 : parent fragment manager",parentFragmentManager.fragments.toString())
+        Log.e("Fragment 3 : child fragment manager",childFragmentManager.fragments.toString())
         return inflater.inflate(R.layout.fragment_3, container, false)
     }
 

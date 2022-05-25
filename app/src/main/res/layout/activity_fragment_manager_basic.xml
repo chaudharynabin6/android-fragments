@@ -5,5 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment_manager.FragmentManagerBasic">
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/activity_fragment_manager_basic_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.chaudharynabin6.fragments.fragment_manager.Fragment3"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

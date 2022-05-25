@@ -2,11 +2,15 @@ package com.chaudharynabin6.fragments.fragment_manager
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.chaudharynabin6.fragments.R
+import com.chaudharynabin6.fragments.databinding.Fragment3Binding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,12 +26,37 @@ class Fragment3 : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var binding: Fragment3Binding
+    var swap = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+        }
+        childFragmentManager.commit {
+            setReorderingAllowed(true)
+            Log.e("child primary navigation fragment",childFragmentManager.primaryNavigationFragment.toString())
+            Log.e("parent primary navigation fragment",parentFragmentManager.primaryNavigationFragment.toString())
+            add<Fragment1>(R.id.fragment_3_fragment_container_1, "fragment-1")
+            add<Fragment2>(R.id.fragment_3_fragment_container_2, "fragment-2")
+            addToBackStack(swap.toString())
+        }
+        childFragmentManager.executePendingTransactions()
+        val frag : Fragment? =  childFragmentManager.findFragmentByTag("fragment-1")
+        Log.e("frag",frag.toString())
+
+        childFragmentManager.commit {
+            setPrimaryNavigationFragment(frag)
+        }
+        childFragmentManager.commit {
+
+            //            val frag : Fragment? = parentFragment.findFragmentByTag("fragment-3")
+
+            Log.e("child primary navigation fragment",childFragmentManager.primaryNavigationFragment.toString())
+            Log.e("parent primary navigation fragment",parentFragmentManager.primaryNavigationFragment.toString())
+
         }
 
 
@@ -36,11 +65,17 @@ class Fragment3 : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        Log.e("Fragment 3 : parent fragment manager",parentFragmentManager.fragments.toString())
-        Log.e("Fragment 3 : child fragment manager",childFragmentManager.fragments.toString())
-        return inflater.inflate(R.layout.fragment_3, container, false)
+
+        Log.e("Fragment 3 : parent fragment manager", parentFragmentManager.fragments.toString())
+        Log.e("Fragment 3 : child fragment manager", childFragmentManager.fragments.toString())
+        binding = Fragment3Binding.inflate(inflater, container, false)
+
+        binding.swapFragment1AndFragment2.setOnClickListener{
+            swapFragment()
+        }
+        return binding.root
     }
 
     companion object {
@@ -62,4 +97,28 @@ class Fragment3 : Fragment() {
                 }
             }
     }
+
+    private fun swapFragment() {
+        if (swap % 2 == 0) {
+
+            childFragmentManager.commit {
+                setReorderingAllowed(true)
+                replace<Fragment1>(R.id.fragment_3_fragment_container_2,"fragment 1")
+                replace<Fragment2>(R.id.fragment_3_fragment_container_1, "fragment-2")
+                addToBackStack(swap.toString())
+            }
+
+        } else {
+            childFragmentManager.commit {
+                setReorderingAllowed(true)
+                replace<Fragment1>(R.id.fragment_3_fragment_container_1, "fragment-1")
+                replace<Fragment2>(R.id.fragment_3_fragment_container_2, "fragment-2")
+                addToBackStack(swap.toString())
+            }
+
+        }
+        swap++
+
+    }
+
 }

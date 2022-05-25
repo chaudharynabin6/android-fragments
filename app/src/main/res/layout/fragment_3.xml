@@ -7,19 +7,27 @@
     tools:context=".fragment_manager.Fragment3">
 
     <!-- TODO: Update blank fragment layout -->
+    <Button
+        android:id="@+id/swap_fragment1_and_fragment2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Swap Fragments"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fragment_3_fragment_container_1"
+        tools:ignore="HardcodedText"
+        />
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_3_fragment_container_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/fragment_3_fragment_container_2"
-        android:name="com.chaudharynabin6.fragments.fragment_manager.Fragment1"
         />
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_3_fragment_container_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_3_fragment_container_1"
-        android:name="com.chaudharynabin6.fragments.fragment_manager.Fragment2"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

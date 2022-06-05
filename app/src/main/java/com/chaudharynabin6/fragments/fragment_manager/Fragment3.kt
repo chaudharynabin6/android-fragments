@@ -43,13 +43,13 @@ class Fragment3 : Fragment() {
             add<Fragment2>(R.id.fragment_3_fragment_container_2, "fragment-2")
             addToBackStack(swap.toString())
         }
-        childFragmentManager.executePendingTransactions()
-        val frag : Fragment? =  childFragmentManager.findFragmentByTag("fragment-1")
-        Log.e("frag",frag.toString())
-
-        childFragmentManager.commit {
-            setPrimaryNavigationFragment(frag)
-        }
+//        childFragmentManager.executePendingTransactions()
+//        val frag : Fragment? =  childFragmentManager.findFragmentByTag("fragment-1")
+//        Log.e("frag",frag.toString())
+//
+//        childFragmentManager.commit {
+//            setPrimaryNavigationFragment(frag)
+//        }
         childFragmentManager.commit {
 
             //            val frag : Fragment? = parentFragment.findFragmentByTag("fragment-3")

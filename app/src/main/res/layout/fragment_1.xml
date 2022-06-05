@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
     tools:context=".fragment_manager.Fragment1">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+   <androidx.fragment.app.FragmentContainerView
+       android:id="@+id/fragment_1_container_1"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       />
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_1_container_2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="fragment 1"
-        tools:ignore="HardcodedText" />
+        android:layout_height="wrap_content"/>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_1_container_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

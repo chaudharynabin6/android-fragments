@@ -2,10 +2,13 @@ package com.chaudharynabin6.fragments.fragment_manager
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.chaudharynabin6.fragments.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -29,15 +32,45 @@ class Fragment1 : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        parentFragmentManager.commit {
+            setReorderingAllowed(true)
+            add<Fragment4>(R.id.fragment_1_container_1, "fragment-4")
+            add<Fragment5>(R.id.fragment_1_container_2, "fragment-5")
+            add<Fragment6>(R.id.fragment_1_container_3, "fragment-6")
+            addToBackStack("0")
+        }
+
+        parentFragmentManager.commit {
+            Log.e("Fragment 1 :after primary navigation",parentFragmentManager.primaryNavigationFragment.toString())
+        }
+        for (item in 1..5){
+            parentFragmentManager.commit {
+                setReorderingAllowed(true)
+                replace<Fragment6>(R.id.fragment_1_container_1, "fragment-4")
+                replace<Fragment5>(R.id.fragment_1_container_2, "fragment-5")
+                replace<Fragment4>(R.id.fragment_1_container_3, "fragment-6")
+                addToBackStack(item.toString())
+            }
+        }
+
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        Log.e("Fragment 1 : parent fragment manager",parentFragmentManager.fragments.toString())
-        Log.e("Fragment 1 : child fragment manager",childFragmentManager.fragments.toString())
+        val frag = parentFragmentManager.findFragmentByTag("fragment-1")
+        Log.e("frag",frag.toString())
+        parentFragmentManager.commit {
+            Log.e("Fragment 1 :before primary navigation",parentFragmentManager.primaryNavigationFragment.toString())
+            setPrimaryNavigationFragment(frag)
+            Log.e("Fragment 1 :after primary navigation",parentFragmentManager.primaryNavigationFragment.toString())
+        }
+
+        Log.e("Fragment 1 : parent fragment manager", parentFragmentManager.fragments.toString())
+        Log.e("Fragment 1 : child fragment manager", childFragmentManager.fragments.toString())
         return inflater.inflate(R.layout.fragment_1, container, false)
     }
 
